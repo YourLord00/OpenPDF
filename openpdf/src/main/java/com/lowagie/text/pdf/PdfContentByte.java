@@ -2437,13 +2437,13 @@ public class PdfContentByte {
     }
 
     private void saveColorFill(ExtendedColor extendedColor) {
-        if (lastFillAlpha != extendedColor.getAlpha()) {
+        if(state != null){
             PdfGState gState = new PdfGState();
             gState.setFillOpacity(extendedColor.getAlpha() / MAX_INT_COLOR_VALUE);
             setGState(gState);
+            state.colorFill = extendedColor;
             lastFillAlpha = extendedColor.getAlpha();
         }
-        if (state != null) state.colorFill = extendedColor;
     }
 
     /** Sets the fill color to a spot color.
